@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js模板</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="template" id="tmp">
+    <div>
+        <div>${msg}"'</div>
+        ${if(data)}
+            ${for (item in data)  }
+                ${if(0)}
+                    <div>${data[item].x+"s"}</div>
+                    <div>${data[item].y+'s'}</div>
+                ${elseif (item)}
+                        <div>err</div> 
+                    ${for (var i =0;i<5;i++)}
+                        <p>hello world!</p>
+                    ${endfor}
+                ${ endif }
+            ${endfor}
+        ${endif}
+    </div>
+</script>
+
+<script src="./xttemplate.js"></script>
+<script>
+(function () {
+    // import Xttemplate from './xttemplate';
+
+    let snip = new Xttemplate(),
+        view = snip.init(
+        {   
+            el: '#app',
+            template: '#tmp',
+        }, {
+            msg: 1,
+            data: [ {x:1,y:2},{x:3,y:4}]
+        }
+    );
+})()
+</script>
+</body>
+</html>
