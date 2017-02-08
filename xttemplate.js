@@ -31,17 +31,13 @@ class Xttemplate {
                 parrentEnd = new RegExp('^\\s*(endif|endfor)\\s*$','i'),
                 parrentElse = new RegExp('^\\s*else\\s*$','i'),
                 parrentElseif = new RegExp('^\\s*elseif\\s*\\((.*?)\\)\\s*$','i');
-            if(parrentStart.test(text)) {
-                text +='{';
-            }else if(parrentEnd.test(text)) {
-                text ='}';
-            }else if(parrentElse.test(text)){
-                text = '}else{';
-            }else if(parrentElseif.test(text)){
-                text = `}else if(${RegExp.$1}){`;
 
-            }else{
-                text = `html.push(${text})`
+            switch(true) {
+                case parrentStart.test(text) : text +='{'; break;
+                case parrentEnd.test(text) : text ='}'; break;
+                case parrentElse.test(text) : text = '}else{'; break;
+                case parrentElseif.test(text) :  text = `}else if(${RegExp.$1}){`; break;
+                default: text = `html.push(${text})`;
             }
 
             this.funText+=(text+';')
